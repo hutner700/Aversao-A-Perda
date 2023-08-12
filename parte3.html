@@ -188,6 +188,7 @@
     }
     function processo_final(_){
         console.log(respostas)
+
     }
 
     function next_question(){
@@ -218,13 +219,13 @@
         return padrao.test(variavel);
     }
 
-    function showQuestion(qtxt){
+    function showQuestion(){
         var questionText = document.querySelector('p[class="question"]')
         if (verificaFormato(window.stage)) {
             questionText.textContent = `${formatarEtapa(window.stage)} de 3 - Aparecerá 2 opções, escolha a que você fica mais confortavel`
             plotarRespostas()
         } else {
-            questionText.textContent = qtxt
+            questionText.textContent = `Em trabalho, numeros finais: \n${JSON.stringify(window.respostas).replaceAll(',','\n').replace('{',"\n").replace('}','')}`
         }
     }
 
