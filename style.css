@@ -1,13 +1,10 @@
 html {
     background-color: #bdc3c7
-    /* linear-gradient(180deg, rgba(100,149,237,1) 0%, rgba(240,230,140,1) 100%); 
-    padding: 0px; */
 }
 body {
     width: 90%;
     min-height: calc(100vh - 4em);
     margin: 0 auto;
-    /*padding: 2em;*/
     background-color: #e5e5e5;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -139,8 +136,8 @@ img.center {
     border-radius: 8pt;
     color: white;
     padding: 8pt;
-    width: 10%;
-    min-width: 100pt;
+    width: 15%;
+    min-width: 150pt;
     text-align: center;
     text-decoration: none;
     display: block;
@@ -530,8 +527,8 @@ li.nav a:hover:not(.active), #navres a:hover {
     max-width: 80%;
     width: 80%;
     font-size: 2.5em !important; 
-    margin: 
   }
+  
   p.question {
     min-height: 224px;
     min-width: 0px;
@@ -540,62 +537,6 @@ li.nav a:hover:not(.active), #navres a:hover {
     font-size: 3.5em !important;
   }
   .small_button, .small_button_off {
-    font-size: 2em;
+    font-size: 5em;
   }
 }
-
-/* @media (prefers-color-scheme: dark) {
-    html {
-        background-color: #666666;
-    }
-    body {
-        box-shadow: none;
-        background-color: #222222;
-    }
-    div.element {
-        background-color: #444444;
-    }
-    div.main {
-        background-color: #222222;
-    }
-    ul.ulnav {
-        background-color: #444444;
-    }
-    li.nav a {
-        color: white;
-    }
-    #navres a {
-        color: LightGray;
-    }
-    h1, h2, p {
-        color: white;
-    }
-    p.question {
-        background-color: black;
-        color: white;
-        box-shadow: none;
-    }
-    .rvlogo a {
-        color: white;
-    }
-    ul.ulnav {
-        border-right: 10px solid #666666;
-    }
-    .tab button:hover {
-        background-color: #444444;
-        color: white;
-    }
-    .tab button.active {
-        background-color: #444444;
-        color: white;
-    }
-    .tab button {
-        color: white;
-    }
-    p.ideodesc, dt, dd {
-        color: white;
-    }
-    h1 a, h2 a, p a, p.ideodesc a, dt a, dd a {
-        color: LightGray;
-    }
-} */

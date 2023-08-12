@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700%7CRoboto:400,700" rel="stylesheet">
+    <link href='style.css' rel='stylesheet' type='text/css'>
+    <title data-i18n="title-quiz">Aversão a perda Formulario</title>
+    <meta charset="utf-8">
+</head>
+	
+<div class="navdiv">
+    <ul class="ulnav">
+        <li class="rvlogo"><b><a>Aversão a perda</a></b></li>
+        <li class="nav"> <a href="index.html">
+        <span data-i18n="index">Pagina Inicial</span></a></li>
+        <li class="nav"> <a class="activenav" href="#">
+        <span data-i18n="inst-h2">Instruções</span></a></li>
+        <li class="nav"> <a href="quiz.html">
+        <span data-i18n="quiz"> Formulário </span></a></li>
+    </ul> 
+</div>
+
+<div class="main">
+<br>
+<h1>Aversão a perda</h1>
+<hr>
+<p class="question" id="question-text"></p>
+<div id="alternativas">
+    <button class="button" onclick="next_question( 1.0)" style="background-color: #2196f3;">Strongly Agree</button> <br>
+    <button class="button" onclick="next_question( 0.5)" style="background-color: #4caf50;">Agree</button> <br>
+    <button class="button" onclick="next_question( 0.0)" style="background-color: #bbbbbb;">Neutral/Unsure</button> <br>
+    <button class="button" onclick="next_question(-0.5)" style="background-color: #f44336;">Disagree</button> <br>
+    <button class="button" onclick="next_question(-1.0)" style="background-color: #b71c1c;">Strongly Disagree</button> <br>
+</div>
+    <button class="small_button" onclick="next_question()" id="back_button" style="background-color: #2196f3; min-width: 500px;">Proxima</button>
+<br>
+
+</div>
+<!-- JavaScript for the test itself -->
+<script>
+    var questions = {
+        "etapa1": 
+            {
+                "Risk": "50% de chance de ganhar R$1000 <br> 50% de chance de não ganhar nada",
+                "Safe": "ganho garantido de R${safe}",
+                "SafeNumber": 500
+            },
+        "etapa2":
+            {
+                "Risk": " 50% de chance de ganhar R$1000 <br> 50% de chance de perder R${risk}",
+                "Safe": "não ganhar ou perder nada",
+                "RiskNumber": 1000
+            },
+        "etapa3":
+            {
+                "Risk": "50% de chance de não ganhar nem perder <br> 50% de chance de perder {risk}",
+                "Safe": "perda garantida de {safe}",
+                "RiskNumber": 440,
+                "SafeNumber": 220
+            }};
+    var stage = "etapa1"
+    var respostas = {};
+
+    function plotarRespostas(){
+        var bloco_resps = document.querySelector('div[id="alternativas"]')
+        bloco_resps.innerHTML = ''
+        let questoes = window.questions
+        // risk
+        var alternativaRisk = document.createElement("button")
+        alternativaRisk.className = 'button';
+        alternativaRisk.style.backgroundColor = '#4caf50';
+        alternativaRisk.setAttribute("ID","Risk")
+        alternativaRisk.innerHTML = questoes[window.stage].Risk.replace("{risk}",questoes[window.stage].RiskNumber)
+        alternativaRisk.setAttribute("onclick", `select("Risk")`);
+        alternativaRisk.classList.add('alternativa')
+        // safe 
+        var alternativaSafe = document.createElement("button")
+        alternativaSafe.className = 'button';
+        alternativaSafe.style.backgroundColor = '#4caf50';
+        alternativaSafe.setAttribute("ID","Safe")
+        alternativaSafe.innerHTML = questoes[window.stage].Safe.replace("{safe}",questoes[window.stage].SafeNumber)
+        alternativaSafe.setAttribute("onclick", `select("Safe")`);
+        alternativaSafe.classList.add('alternativa')
+        bloco_resps.appendChild(alternativaRisk)
+        bloco_resps.appendChild(document.createElement("br"))
+        bloco_resps.appendChild(alternativaSafe)
+        bloco_resps.appendChild(document.createElement("br"))
+    }
+
+    function select(sel){
+        var risk = document.getElementById('Risk')
+        var safe = document.getElementById('Safe')
+        risk.style.removeProperty('border')
+        risk.classList.remove("Selected");
+        safe.style.removeProperty('border')
+        safe.classList.remove("Selected");
+        if (sel){
+            var selected = document.getElementById(sel);
+            selected.style.border = "5px solid red"
+            selected.classList.add("Selected")
+        }
+    }
+
+
+    function verificarTorcao(sequencia) {
+        if (sequencia.length < 3) {
+            return false;
+        }
+
+        let padraoMudou = false;
+        let padraoDetectado = false;
+        let last = null;
+        for (let a of sequencia) {
+            if (!last){
+                last = a
+                continue
+            }
+            if (a !== last){
+                if (!padraoMudou){
+                    padraoMudou = true;
+                    last = a
+                } else {
+                    padraoDetectado = true;
+                }
+            }
+        }
+        return padraoDetectado;
+    }
+
+    function processo_etapa1(houve_torcao, selecionado){
+        if(houve_torcao){
+                var conversor = {"etapa1":"etapa2","etapa2":"etapa3"}
+                let ultimo_numero = window.questions.etapa1.SafeNumber
+                let ultima_movimentacao = window.respostas.etapa1[window.respostas.etapa1.length - 1]
+                window.stage = conversor[window.stage]
+                var multi = {"Safe": 5/6, "Risk":1.5}
+                window.respostas.etapa1 = Math.round(multi[ultima_movimentacao] * ultimo_numero / 5) * 5
+                showQuestion()
+                return ''
+            }
+        if(selecionado == "Safe"){
+            window.questions.etapa1.SafeNumber = window.questions.etapa1.SafeNumber / 2
+        } else{
+            window.questions.etapa1.SafeNumber = window.questions.etapa1.SafeNumber * 1.5
+        }
+        window.questions.etapa1.SafeNumber = Math.round(window.questions.etapa1.SafeNumber / 5) * 5
+        showQuestion()
+    }
+
+    function processo_etapa2(houve_torcao, selecionado){  
+        if(houve_torcao){
+            var conversor = {"etapa1":"etapa2","etapa2":"etapa3"}
+            let ultimo_numero = window.questions.etapa2.RiskNumber
+            let ultima_movimentacao = window.respostas.etapa2[window.respostas.etapa2.length - 1]
+            var multi = {"Safe": 5/6, "Risk": 1.5}
+            window.respostas.etapa2 = Math.round(multi[ultima_movimentacao] * ultimo_numero / 5) * 5
+            window.stage = conversor[window.stage]
+            window.questions.etapa3.RiskNumber = window.respostas.etapa2
+            showQuestion()
+            return ''
+        }
+        if(selecionado == "Safe"){
+            window.questions.etapa2.RiskNumber = window.questions.etapa2.RiskNumber / 2
+        } else{
+            window.questions.etapa2.RiskNumber = window.questions.etapa2.RiskNumber * 1.5
+        }
+        window.questions.etapa2.RiskNumber = Math.round(window.questions.etapa2.RiskNumber / 5) * 5
+        showQuestion()
+    }
+
+    function processo_etapa3(houve_torcao, selecionado){
+        if(houve_torcao){
+            var conversor = {"etapa1":"etapa2","etapa2":"etapa3", "etapa3":"final"}
+            let ultimo_numero = window.questions.etapa3.SafeNumber
+            let ultima_movimentacao = window.respostas.etapa3[window.respostas.etapa3.length - 1]
+            var multi = {"Risk": 5/6, "Safe": 1.5}
+            window.respostas.etapa3 = Math.round(multi[ultima_movimentacao] * ultimo_numero / 5) * 5
+            window.stage = conversor[window.stage]
+            showQuestion()
+            return ''
+        }
+        if(selecionado == "Risk"){
+            window.questions.etapa3.SafeNumber = window.questions.etapa3.SafeNumber / 2
+        } else{
+            window.questions.etapa3.SafeNumber = window.questions.etapa3.SafeNumber * 1.5
+        }
+        window.questions.etapa3.SafeNumber = Math.round(window.questions.etapa3.SafeNumber / 5) * 5
+        showQuestion()
+    }
+    function processo_final(_){
+        console.log(respostas)
+    }
+
+    function next_question(){
+        var selected = document.querySelector('.Selected');
+        if (!selected){
+            alert("Selecione uma alternativa!")
+        }
+        var selecionado = selected.id
+        if (window.respostas[window.stage]){
+            window.respostas[window.stage] = [...window.respostas[window.stage], selecionado]
+        } else {
+            window.respostas[window.stage] = [selecionado,]
+        }
+        // detectar torcao
+        let houve_torcao = verificarTorcao(window.respostas[window.stage])
+        var comandos = {"etapa1":processo_etapa1, "etapa2": processo_etapa2, "etapa3": processo_etapa3, "final":processo_final}
+        comandos[window.stage](houve_torcao, selecionado)
+    }
+    function formatarEtapa(texto) {
+        const numero = texto.match(/\d+/)[0]; // Extrai o número da string
+        const etapa = texto.replace(/\d+/, ''); // Remove o número da string
+        return `${etapa} ${numero}`;
+    }
+
+    function verificaFormato(variavel) {
+        const padrao = /^[a-zA-Z]{5}\d$/; // Expressão regular para XXXXX8
+
+        return padrao.test(variavel);
+    }
+
+    function showQuestion(qtxt){
+        var questionText = document.querySelector('p[class="question"]')
+        if (verificaFormato(window.stage)) {
+            questionText.textContent = `${formatarEtapa(window.stage)} de 3 - Aparecerá 2 opções, escolha a que você fica mais confortavel`
+            plotarRespostas()
+        } else {
+            questionText.textContent = qtxt
+        }
+    }
+
+    showQuestion();
+</script>
+</body>
+</html>
