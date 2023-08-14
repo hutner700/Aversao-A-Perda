@@ -175,7 +175,7 @@
             var multi = {"Risk": 5/6, "Safe": 1.5}
             window.respostas.etapa3 = Math.round(multi[ultima_movimentacao] * ultimo_numero / 5) * 5
             window.stage = conversor[window.stage]
-            showQuestion()
+            end()
             return ''
         }
         if(selecionado == "Risk"){
@@ -186,9 +186,9 @@
         window.questions.etapa3.SafeNumber = Math.round(window.questions.etapa3.SafeNumber / 5) * 5
         showQuestion()
     }
-    function processo_final(_){
-        console.log(respostas)
-
+    function end(_){
+        localStorage.setItem("Parte3", JSON.stringify(window.respostas))
+        window.location.href = "riskTolerance.html"
     }
 
     function next_question(){
@@ -204,7 +204,7 @@
         }
         // detectar torcao
         let houve_torcao = verificarTorcao(window.respostas[window.stage])
-        var comandos = {"etapa1":processo_etapa1, "etapa2": processo_etapa2, "etapa3": processo_etapa3, "final":processo_final}
+        var comandos = {"etapa1":processo_etapa1, "etapa2": processo_etapa2, "etapa3": processo_etapa3, "final":end}
         comandos[window.stage](houve_torcao, selecionado)
     }
     function formatarEtapa(texto) {

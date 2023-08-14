@@ -173,188 +173,188 @@ div.bar {
     display: block;
     width: 50%;
 }
-div.text-wrapper-reform {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #b4a7d6;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-preserve {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #45818e;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-stateown {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #626e78;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-market {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #9fc5e8;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-central {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #8e7cc3;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-decentral {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #3c78d8;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-world {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #3d85c6;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-nation {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #073763;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-religious {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #6fa8dc;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-secular {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #1155cc;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-economy {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #7e7791;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-nature {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #5e7db2;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-race {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #a2c4c9;
-    display: inline-block;
-    font-weight: bold;
-}
-div.text-wrapper-equality {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 36pt;
-    line-height: 36pt;
-    color: #327785;
-    display: inline-block;
-    font-weight: bold;
-}
-div.reform {
-    background-color: #d9d2e9;
-    text-align: left;
-    border-right-style: solid;
-}
-div.preserve {
-    background-color: #76a5af;
-    text-align: right;
-    border-left-style: solid;
-}
-div.stateown {
-    background-color: #768796;
-    text-align: left;
-    border-right-style: solid;
-}
-div.market {
-    background-color: #cfe2f3;
-    text-align: right;
-    border-left-style: solid;
-}
-div.central {
-    background-color: #b4a7d6;
-    text-align: left;
-    border-right-style: solid;
-}
-div.decentral {
-    background-color: #6d9eeb;
-    text-align: right;
-    border-left-style: solid;
-}
-div.world {
-    background-color: #6fa8dc;
-    text-align: left;
-    border-right-style: solid;
-}
-div.nation {
-    background-color: #0b5394;
-    text-align: right;
-    border-left-style: solid;
-}
-div.religious {
-    background-color: #9fc5e8;
-    text-align: left;
-    border-right-style: solid;
-}
-div.secular {
-    background-color: #3c78d8;
-    text-align: right;
-    border-left-style: solid;
-}
-div.economy {
-    background-color: #9b92b2;
-    text-align: left;
-    border-right-style: solid;
-}
-div.nature {
-    background-color: #78a1e5;
-    text-align: right;
-    border-left-style: solid;
-}
-div.race {
-    background-color: #d0e0e3;
-    text-align: left;
-    border-right-style: solid;
-}
-div.equality {
-    background-color: #639eab;
-    text-align: right;
-    border-left-style: solid;
-}
+/*div.text-wrapper-reform {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #b4a7d6;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-preserve {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #45818e;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-stateown {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #626e78;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-market {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #9fc5e8;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-central {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #8e7cc3;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-decentral {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #3c78d8;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-world {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #3d85c6;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-nation {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #073763;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-religious {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #6fa8dc;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-secular {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #1155cc;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-economy {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #7e7791;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-nature {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #5e7db2;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-race {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #a2c4c9;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.text-wrapper-equality {*/
+/*    font-family: 'Montserrat', sans-serif;*/
+/*    font-size: 36pt;*/
+/*    line-height: 36pt;*/
+/*    color: #327785;*/
+/*    display: inline-block;*/
+/*    font-weight: bold;*/
+/*}*/
+/*div.reform {*/
+/*    background-color: #d9d2e9;*/
+/*    text-align: left;*/
+/*    border-right-style: solid;*/
+/*}*/
+/*div.preserve {*/
+/*    background-color: #76a5af;*/
+/*    text-align: right;*/
+/*    border-left-style: solid;*/
+/*}*/
+/*div.stateown {*/
+/*    background-color: #768796;*/
+/*    text-align: left;*/
+/*    border-right-style: solid;*/
+/*}*/
+/*div.market {*/
+/*    background-color: #cfe2f3;*/
+/*    text-align: right;*/
+/*    border-left-style: solid;*/
+/*}*/
+/*div.central {*/
+/*    background-color: #b4a7d6;*/
+/*    text-align: left;*/
+/*    border-right-style: solid;*/
+/*}*/
+/*div.decentral {*/
+/*    background-color: #6d9eeb;*/
+/*    text-align: right;*/
+/*    border-left-style: solid;*/
+/*}*/
+/*div.world {*/
+/*    background-color: #6fa8dc;*/
+/*    text-align: left;*/
+/*    border-right-style: solid;*/
+/*}*/
+/*div.nation {*/
+/*    background-color: #0b5394;*/
+/*    text-align: right;*/
+/*    border-left-style: solid;*/
+/*}*/
+/*div.religious {*/
+/*    background-color: #9fc5e8;*/
+/*    text-align: left;*/
+/*    border-right-style: solid;*/
+/*}*/
+/*div.secular {*/
+/*    background-color: #3c78d8;*/
+/*    text-align: right;*/
+/*    border-left-style: solid;*/
+/*}*/
+/*div.economy {*/
+/*    background-color: #9b92b2;*/
+/*    text-align: left;*/
+/*    border-right-style: solid;*/
+/*}*/
+/*div.nature {*/
+/*    background-color: #78a1e5;*/
+/*    text-align: right;*/
+/*    border-left-style: solid;*/
+/*}*/
+/*div.race {*/
+/*    background-color: #d0e0e3;*/
+/*    text-align: left;*/
+/*    border-right-style: solid;*/
+/*}*/
+/*div.equality {*/
+/*    background-color: #639eab;*/
+/*    text-align: right;*/
+/*    border-left-style: solid;*/
+/*}*/
 span.weight-300 {
     font-weight: 300;
 }
@@ -494,6 +494,37 @@ li.nav a:hover:not(.active), #navres a:hover {
     position: absolute;
     bottom: 20px;
     width: 100%
+}
+
+.input-button {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    border-radius: 8pt;
+    padding: 8pt;
+    width: 50%;
+    min-width: 500pt;
+    text-align: center;
+    font-size: 36pt;
+    margin: -2px auto;
+    cursor: pointer;
+    outline: none;
+}
+
+/* Estilo quando o campo de entrada está ativo (com foco) */
+.input-button:focus {
+    box-shadow: 0 0 5px #2196f3; /* Adicione um efeito de destaque quando o campo está ativo */
+}
+
+#alternativas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100px;
+    width: 80%; /* Largura da div */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    padding: 20px; /* Espaçamento interno */
+    margin-bottom: 5px;
 }
 
 @media only screen and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2) {

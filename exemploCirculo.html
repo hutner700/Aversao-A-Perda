@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(to right, green 50%, red 50%);
+            position: relative;
+        }
+
+        .number {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .left {
+            left: 20px;
+        }
+
+        .right {
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="circle">
+    <span class="number left"> R$250 <br> 50% </span>
+    <span class="number right"> R$-350  <br> 50% </span>
+</div>
+</body>
+</html>
