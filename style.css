@@ -527,13 +527,20 @@ li.nav a:hover:not(.active), #navres a:hover {
     margin-bottom: 5px;
 }
 
-@media only screen and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2) {
+#alternativas * {
+    margin: 5px;
+}
+/*@media only screen and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2)*/
+
+
+@media (max-width: 900px), (-webkit-min-device-pixel-ratio: 2){
   div.navdiv {
     display: none;
   }
+
   div.main {
     margin-left: 0%;
-    min-height: none;
+    min-height: 0;
 	width: auto !important;
 	border-width: 0px !important;  
   }
@@ -567,6 +574,7 @@ li.nav a:hover:not(.active), #navres a:hover {
     width: auto;
     font-size: 3.5em !important;
   }
+
   .small_button, .small_button_off {
     font-size: 5em;
   }

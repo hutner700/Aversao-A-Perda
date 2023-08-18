@@ -121,7 +121,6 @@
             alternativa.textContent = questao[`Alternativa ${i}`]
             alternativa.setAttribute("onclick",`selectAlternativa("${i}")`);
             aswnerBox.appendChild(alternativa)
-            aswnerBox.appendChild(document.createElement("br"))
         }
     }
 
@@ -139,7 +138,6 @@
             alternativa.textContent = questao[`Alternativa ${i}`]
             alternativa.setAttribute("onclick",`selectCheck("${i}")`);
             aswnerBox.appendChild(alternativa)
-            aswnerBox.appendChild(document.createElement("br"))
         }
     }
 
@@ -181,7 +179,6 @@
                 box.appendChild(intInput)
 
                 aswnerBox.appendChild(box)
-                aswnerBox.appendChild(document.createElement("br"))
             }
 
         }
@@ -287,6 +284,11 @@
                 return ''
             }
             console.log(window.resposta)
+            // todo: verificar
+            if(window.questions[window.chave_questao].Condicional){
+                condicionalVerifier()
+            }
+
             showQuestion()
             return ''
         }

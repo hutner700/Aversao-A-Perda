@@ -108,7 +108,6 @@
             alternativa.textContent = questao[`Alternativa ${i}`]
             alternativa.setAttribute("onclick",`selectAlternativa("${i}")`);
             aswnerBox.appendChild(alternativa)
-            aswnerBox.appendChild(document.createElement("br"))
         }
     }
 
@@ -195,6 +194,10 @@
             if(!proximaChave()){
                 end()
                 return ''
+            }
+            // todo: verificar
+            if(window.questions[window.chave_questao].Condicional){
+                condicionalVerifier()
             }
             showQuestion()
             return ''
