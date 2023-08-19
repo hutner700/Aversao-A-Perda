@@ -24,14 +24,10 @@
 <h1>Aversão a perda</h1>
 <hr>
 <p class="question" id="question-text"></p>
-<div id="alternativas">
-    <button class="button" onclick="next_question( 1.0)" style="background-color: #2196f3;">Strongly Agree</button> <br>
-    <button class="button" onclick="next_question( 0.5)" style="background-color: #4caf50;">Agree</button> <br>
-    <button class="button" onclick="next_question( 0.0)" style="background-color: #bbbbbb;">Neutral/Unsure</button> <br>
-    <button class="button" onclick="next_question(-0.5)" style="background-color: #f44336;">Disagree</button> <br>
-    <button class="button" onclick="next_question(-1.0)" style="background-color: #b71c1c;">Strongly Disagree</button> <br>
+<div id="alternativasCircle">
+
 </div>
-    <button class="small_button" onclick="next_question()" id="back_button" style="background-color: #2196f3; min-width: 500px;">Proxima</button>
+    <button class="small_button" onclick="start_questions()" id="back_button" style="background-color: #2196f3; min-width: 500px;">Proxima</button>
 <br>
 
 </div>
@@ -43,6 +39,7 @@
                 "Risk": "50% de chance de ganhar R$1000 <br> 50% de chance de não ganhar nada",
                 "Safe": "ganho garantido de R${safe}",
                 "SafeNumber": 500
+
             },
         "etapa2":
             {
@@ -60,30 +57,89 @@
     var stage = "etapa1"
     var respostas = {};
 
+    function buildCircle(colorLeft, textLeft, colorRight = '', textRight = ''){
+        if(colorRight) {
+            const divCircleRisk = document.createElement("div");
+            divCircleRisk.className = "circle";
+            divCircleRisk.style.background = `linear-gradient(to right, ${colorLeft} 50%, ${colorRight} 50%)`;
+
+            let riskLeftNumber = document.createElement("span")
+            riskLeftNumber.className = "number left"
+            riskLeftNumber.innerHTML = textLeft
+
+            let riskRightNumber = document.createElement("span")
+            riskRightNumber.className = "number right"
+            riskRightNumber.innerHTML = textRight
+
+            divCircleRisk.appendChild(riskLeftNumber)
+            divCircleRisk.appendChild(riskRightNumber)
+            return divCircleRisk
+        } else {
+            const divCircleRisk = document.createElement("div");
+            divCircleRisk.className = "circle";
+            divCircleRisk.style.background = `linear-gradient(to right, ${colorLeft} 50%, ${colorLeft} 50%)`;
+            let riskLeftNumber = document.createElement("span")
+            riskLeftNumber.className = "number"
+            riskLeftNumber.innerHTML = textLeft
+            divCircleRisk.appendChild(riskLeftNumber)
+            return divCircleRisk
+
+        }
+    }
+
     function plotarRespostas(){
-        var bloco_resps = document.querySelector('div[id="alternativas"]')
+        var bloco_resps = document.querySelector('div[id="alternativasCircle"]')
         bloco_resps.innerHTML = ''
         let questoes = window.questions
-        // risk
-        var alternativaRisk = document.createElement("button")
+
+        const alternativaRisk = document.createElement("button")
         alternativaRisk.className = 'button';
         alternativaRisk.style.backgroundColor = '#4caf50';
         alternativaRisk.setAttribute("ID","Risk")
-        alternativaRisk.innerHTML = questoes[window.stage].Risk.replace("{risk}",questoes[window.stage].RiskNumber)
         alternativaRisk.setAttribute("onclick", `select("Risk")`);
         alternativaRisk.classList.add('alternativa')
-        // safe 
+        alternativaRisk.classList.add('AltCircle')
+
         var alternativaSafe = document.createElement("button")
         alternativaSafe.className = 'button';
         alternativaSafe.style.backgroundColor = '#4caf50';
         alternativaSafe.setAttribute("ID","Safe")
-        alternativaSafe.innerHTML = questoes[window.stage].Safe.replace("{safe}",questoes[window.stage].SafeNumber)
         alternativaSafe.setAttribute("onclick", `select("Safe")`);
         alternativaSafe.classList.add('alternativa')
-        bloco_resps.appendChild(alternativaRisk)
-        bloco_resps.appendChild(document.createElement("br"))
+        alternativaSafe.classList.add('AltCircle')
+
+
+        if (window.stage === "etapa1"){
+
+            let divCircleRisk = buildCircle("green",`+ R$1.000 <br> 50%`,"grey",`Sem Ganho <br> Ou Perda  <br> 50%`)
+            alternativaRisk.appendChild(divCircleRisk)
+
+            let divCircleSafe = buildCircle("green",` + R$${questoes[window.stage].SafeNumber} <br> Garantido`)
+            alternativaSafe.appendChild(divCircleSafe)
+
+        } else if (window.stage === "etapa2"){
+
+            let divCircleRisk = buildCircle("red",`- R$${questoes[window.stage].RiskNumber} <br> 50%`,"green",`+ R$1000 <br> 50%`)
+            alternativaRisk.appendChild(divCircleRisk)
+
+            let divCircleSafe = buildCircle("grey",`Sem Ganho <br> Ou Perda <br> Garantida`)
+            alternativaSafe.appendChild(divCircleSafe)
+
+        } else if (window.stage === "etapa3") {
+
+            let divCircleRisk = buildCircle("red",`- R$${questoes[window.stage].RiskNumber} <br> 50%`,"grey",`Sem Ganho <br> Ou Perda <br> 50%`)
+            alternativaRisk.appendChild(divCircleRisk)
+
+            let divCircleSafe = buildCircle("red",` - R$${questoes[window.stage].SafeNumber} <br> garantido`)
+            alternativaSafe.appendChild(divCircleSafe)
+
+        }
+
         bloco_resps.appendChild(alternativaSafe)
         bloco_resps.appendChild(document.createElement("br"))
+        bloco_resps.appendChild(alternativaRisk)
+        bloco_resps.appendChild(document.createElement("br"))
+
     }
 
     function select(sel){
@@ -187,7 +243,8 @@
         showQuestion()
     }
     function end(_){
-        localStorage.setItem("Parte3", JSON.stringify(window.respostas))
+        delete(window.respostas.final)
+        localStorage.setItem("Quiz", JSON.stringify(window.respostas))
         window.location.href = "riskTolerance.html"
     }
 
@@ -195,6 +252,7 @@
         var selected = document.querySelector('.Selected');
         if (!selected){
             alert("Selecione uma alternativa!")
+            return ''
         }
         var selecionado = selected.id
         if (window.respostas[window.stage]){
@@ -229,7 +287,80 @@
         }
     }
 
-    showQuestion();
+    function start_questions() {
+        let selected = document.querySelector('.Selected');
+        if (!selected) {
+            alert("Selecione uma alternativa!")
+            return ''
+        }
+        let backButton = document.getElementById("back_button");
+        backButton.removeAttribute("onclick");
+        backButton.setAttribute("onclick", "next_question()");
+        showQuestion();
+    }
+    function instructionSelect(sel){
+        const risk = document.getElementById('Risk')
+        const safe = document.getElementById('Safe')
+        risk.style.removeProperty('border')
+        risk.classList.remove("Selected");
+        safe.style.removeProperty('border')
+        safe.classList.remove("Selected");
+        if (sel){
+            let selected = document.getElementById(sel);
+            selected.style.border = "5px solid red"
+            selected.classList.add("Selected")
+        }
+
+    }
+
+    function instruction(){
+        var questionText = document.querySelector('p[class="question"]')
+        questionText.textContent = `Você deve escolher entre duas alternativas A e B. Para selecionar sua alternativa
+                                    preferida, clique na alternativa A (se preferir A) ou na alternativa B (se preferir B).
+                                    Por favor, preste atenção às cores e aos valores antes de escolher. Depois de
+                                    selecionar sua alternativa preferida, clique em OK para prosseguir para a
+                                    próxima pergunta. Por exemplo: O que você prefere?`
+        var bloco_resps = document.querySelector('div[id="alternativasCircle"]')
+        bloco_resps.innerHTML = ''
+        let questoes = window.questions
+
+        const alternativaRisk = document.createElement("button")
+        alternativaRisk.className = 'button';
+        alternativaRisk.style.backgroundColor = 'white';
+        alternativaRisk.setAttribute("ID","Risk")
+        alternativaRisk.setAttribute("onclick", `instructionSelect("Risk")`);
+        alternativaRisk.classList.add('alternativa')
+        alternativaRisk.classList.add('AltCircle')
+
+        var alternativaSafe = document.createElement("button")
+        alternativaSafe.className = 'button';
+        alternativaSafe.style.backgroundColor = 'white';
+        alternativaSafe.setAttribute("ID","Safe")
+        alternativaSafe.setAttribute("onclick", `instructionSelect("Safe")`);
+        alternativaSafe.classList.add('alternativa')
+        alternativaSafe.classList.add('AltCircle')
+
+        var img1 = document.createElement("img");
+        img1.src = "img/1 Pizza.png";
+        img1.alt = "Imagem 1";
+        img1.style.minHeight = "250px";
+
+        var img2 = document.createElement("img");
+        img2.src = "img/Pizza Cara Coroa.png";
+        img2.alt = "Imagem 2";
+        img2.style.minHeight = "250px";
+
+        alternativaSafe.appendChild(img1)
+        alternativaRisk.appendChild(img2)
+
+        bloco_resps.appendChild(alternativaSafe)
+        bloco_resps.appendChild(document.createElement("br"))
+        bloco_resps.appendChild(alternativaRisk)
+        bloco_resps.appendChild(document.createElement("br"))
+
+    }
+
+    instruction()
 </script>
 </body>
 </html>

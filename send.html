@@ -68,10 +68,10 @@
 	<p style="font-size:36pt">Prezado(a) participante, <br>
         Agradecemos a participação, estamos enviando as respostas!
     </p>
-    <p style="font-size:36pt">Status: </p> <p id="statusSend" style="font-size: 150%; color:red">Não enviado... Aguarde!</p>
+    <p style="font-size:36pt">Status: <span id="statusSend" style="font-size: 36pt; color:red">Não enviado... Aguarde!</span> </p>
 	<br> 
 	<br>
-    <button class="button" onclick="location.href='instructions.html';" style="font-size:36pt;background-color: red" id="startbutton" >Reenviar</button>
+    <button class="button" style="font-size:36pt;background-color: red" id="restartbutton" >Reenviar</button>
 </div>
 
 
@@ -79,19 +79,28 @@
 
     <script type="text/javascript">
 
-        const not_send_text = "Não enviado... Aguarde!"
-        const send_text = "Enviado!"
-        const not_send_color = "red"
-        const send_color = "blue"
+        document.getElementById("restartbutton").addEventListener("click", function() {
+            document.getElementById("restartbutton").disabled = true;
+            alterarStatus(false)
+            sendInformation()
+            setTimeout(() => {document.getElementById("restartbutton").disabled = false }, 10000)
+            });
+
+        document.getElementById("restartbutton").disabled = true;
 
         function alterarStatus(status = true){
+            const not_send_text = "Não enviado... Aguarde!"
+            const send_text = "Enviado!"
+            const not_send_color = "red"
+            const send_color = "blue"
+
             const elemento = document.getElementById("statusSend");
             if (status) {
-                elemento.textContent = window.send_text
-                elemento.style.color = window.send_color
+                elemento.textContent = send_text
+                elemento.style.color = send_color
             } else {
-                elemento.textContent = window.not_send_text
-                elemento.style.color = window.not_send_color
+                elemento.textContent = not_send_text
+                elemento.style.color = not_send_color
             }
         }
 
@@ -99,11 +108,26 @@
             let data = {}
             data.SocioEconomics = JSON.parse(localStorage.SocioEconomics)
             data.RiskAverssion = JSON.parse(localStorage.RiskAverssion)
-            data.Parte3 = JSON.parse(localStorage.Parte3)
-            console.log(data)
+            data.Quiz = JSON.parse(localStorage.Quiz)
+
+            const jsonData = JSON.stringify(data);
+
+            const encodedData = encodeURIComponent(jsonData);
+
+            const url = `https://script.google.com/macros/s/AKfycby7vlwGMpMw36HLgxlYpsP4C7g0GK5a2rVUHdUeyNDGzlYGSzv6zlXLmx0vVpor3hI3tQ/exec?data=${encodedData}`;
+
+            fetch(url, {
+                method: "GET"
+            }).then(response => {
+                alterarStatus()
+            })
+                .catch(error => {
+                    console.error("Erro", error);
+                })
+            document.getElementById("restartbutton").disabled = false;
         }
 
-        sendInformation()
+    sendInformation()
 	    
     </script>
 

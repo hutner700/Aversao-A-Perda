@@ -530,7 +530,60 @@ li.nav a:hover:not(.active), #navres a:hover {
 #alternativas * {
     margin: 5px;
 }
-/*@media only screen and (orientation:portrait) and (-webkit-min-device-pixel-ratio: 2)*/
+
+.button.AltCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    min-width: 300px;
+}
+
+.circle {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: linear-gradient(to right, green 50%, red 50%);
+    position: relative;
+}
+
+.circle .number {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.circle .left {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+}
+
+.circle .right {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+#alternativasCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%; /* Largura da div */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    padding: 20px; /* Espaçamento interno */
+    margin-bottom: 5px;
+}
+
+#alternativasCircle * {
+    margin: 5px;
+}
 
 
 @media (max-width: 900px), (-webkit-min-device-pixel-ratio: 2){

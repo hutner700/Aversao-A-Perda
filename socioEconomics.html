@@ -27,7 +27,7 @@
 <hr>
 <p class="question" id="question-text"></p>
 <div id="alternativas">
-    <button class="button" onclick="next_question( 1.0)" style="background-color: #2196f3;">Carregando...</button> <br>
+    <button class="button" style="background-color: #2196f3;">Carregando...</button> <br>
 </div>
     <button class="small_button" onclick="next_question()" id="back_button" style="background-color: #2196f3; min-width: 500px;">Proxima</button>
 <br>
@@ -39,6 +39,13 @@
     let tipo_questao
     let questions
     let ids_questao = []
+
+    function validated_input(){
+        if (window.id_questao === "6"){
+
+        }
+
+    }
 
     function encontrarElementosPorChave(dados, chave, valorDesejado) {
         if (Array.isArray(dados)) {
@@ -61,17 +68,15 @@
     function proximaChave() {
         const chaves = Object.keys(window.questions);
         const indiceAtual = chaves.indexOf(window.chave_questao);
-
-        if (indiceAtual !== -1 && indiceAtual < chaves.length - 1) {
-            window.chave_questao = Object.keys(window.questions)[indiceAtual + 1]
-            window.id_questao = window.questions[window.chave_questao].Identificacao
+        window.chave_questao = Object.keys(window.questions)[indiceAtual + 1]
+        window.id_questao = window.questions[window.chave_questao].Identificacao
+        if (window.id_questao) {
             window.tipo_questao = removerCaracteresEspeciais(window.questions[window.chave_questao]['Tipo de Resposta'])
             return true
         } else {
             return false; // Não há próxima chave
         }
     }
-
 
 
     async function loadedScript() {
@@ -94,6 +99,18 @@
         elementoComAtributoX.style.border = "5px solid red"
         elementoComAtributoX.classList.add("Selected")
     }
+
+    function selectCheck(alternativa){
+        const elementoComAtributoX = document.querySelector(`button[alternativa="${alternativa}"]`);
+        if (elementoComAtributoX.style.border) {
+            elementoComAtributoX.style.removeProperty('border')
+            elementoComAtributoX.classList.remove("Selected")
+        } else {
+            elementoComAtributoX.style.border = "5px solid red"
+            elementoComAtributoX.classList.add("Selected")
+        }
+    }
+
     function plotAlternativas(){
         const regex = /A(\d+)/;
 
@@ -111,6 +128,23 @@
         }
     }
 
+    function plotCheck(){
+        const regex = /C(\d+)/;
+
+        const aswnerBox = document.querySelector('div[id="alternativas"]')
+        aswnerBox.innerHTML = ''
+        const questao = window.questions[window.chave_questao]
+        for (let i = 1; i <= parseInt(questao['Tipo de Resposta'].match(regex)[1]); i++) {
+            let alternativa = document.createElement("button")
+            alternativa.className = 'button';
+            alternativa.style.backgroundColor = '#4caf50';
+            alternativa.setAttribute("Alternativa",i)
+            alternativa.textContent = questao[`Alternativa ${i}`]
+            alternativa.setAttribute("onclick",`selectCheck("${i}")`);
+            aswnerBox.appendChild(alternativa)
+        }
+    }
+
     function plotString(){
         let aswnerBox = document.querySelector('div[id="alternativas"]')
         aswnerBox.innerHTML = ''
@@ -119,16 +153,40 @@
 
         aswnerBox.appendChild(stringInput)
     }
-    function plotInt(){
+    function plotInt(params){
         let aswnerBox = document.querySelector('div[id="alternativas"]')
         aswnerBox.innerHTML = ''
-        let intInput = document.createElement("input")
-        intInput.classList.add('input-button')
-        intInput.type = "number";
-        intInput.step = "1";
-        aswnerBox.appendChild(intInput)
-    }
+        if(params === 1) {
+            let intInput = document.createElement("input")
+            intInput.classList.add('input-button')
+            intInput.type = "number";
+            intInput.step = "1";
+            aswnerBox.appendChild(intInput)
+        } else {
+            const questao = window.questions[window.chave_questao]
+            for (let i = 1; i <= params; i++) {
+                let box = document.createElement("div")
+                box.style.width = "100%";
+                box.style.justifyContent = "center"
 
+                let descricao = document.createElement("p")
+                descricao.textContent = questao[`Alternativa ${i}`]
+
+
+                let intInput = document.createElement("input")
+                intInput.classList.add('input-button')
+                intInput.type = "number";
+                intInput.step = "1";
+                intInput.setAttribute("Alternativa",i)
+
+                box.appendChild(descricao)
+                box.appendChild(intInput)
+
+                aswnerBox.appendChild(box)
+            }
+
+        }
+    }
 
     function respAlternativa(){
         let aswnerBox = document.querySelector('div[id="alternativas"]')
@@ -144,6 +202,25 @@
 
     }
 
+    function respCheck(){
+        let aswnerBox = document.querySelector('div[id="alternativas"]')
+
+        let selectedButtons = aswnerBox.querySelectorAll('button.Selected');
+
+        if(selectedButtons.length === 0){
+            alert("Selecione uma opção!")
+            return false
+        }
+
+        let respostas = []
+        selectedButtons.forEach(elemento => {
+            respostas.push(elemento.getAttribute('alternativa'))
+        });
+
+        window.resposta[window.id_questao] = respostas
+        return true
+    }
+
     function respString(){
         // todo: multiplas strings input
         const input_box = document.querySelector('#alternativas > input')
@@ -156,17 +233,32 @@
         }
     }
 
-    function respInt(){
-        // todo: multiplos int's
-        const input_box = document.querySelector('#alternativas > input')
-        if(!input_box.value){
-            alert("A resposta está vazia")
-            return false
+    function respInt(param){
+        if (param === 1) {
+            const input_box = document.querySelector('#alternativas > input')
+            if (!input_box.value) {
+                alert("A resposta está vazia")
+                return false
+            } else {
+                window.resposta[window.id_questao] = input_box.value
+                return true
+            }
         } else {
-            window.resposta[window.id_questao] = input_box.value
-            return true
+            const input_boxs = document.querySelectorAll('#alternativas input')
+            let resp = {}
+            input_boxs.forEach(box => {
+                if (box.value !== ''){
+                    resp[box.getAttribute('alternativa')] = box.value
+                }
+            })
+            if (Object.keys(resp).length < param){
+                alert('Preencha todos os campos, mesmo que com 0')
+                return false
+            } else {
+                window.resposta[window.id_questao] = resp
+                return true
+            }
         }
-
     }
 
     function removerCaracteresEspeciais(texto) {
@@ -184,7 +276,7 @@
 
     function end(){
         localStorage.setItem("SocioEconomics", JSON.stringify(window.resposta))
-        window.location.href = "parte3.html"
+        window.location.href = "/parte3.html"
     }
 
     function next_question(skipped = false){
@@ -195,10 +287,10 @@
                 end()
                 return ''
             }
-            // todo: verificar
             if(window.questions[window.chave_questao].Condicional){
                 condicionalVerifier()
             }
+
             showQuestion()
             return ''
         }
@@ -208,8 +300,11 @@
         if(!window.resposta){
             window.resposta = {}
         }
+
         if (/[A-Z]\d+/.test(tipo)){
             let tipo_pratico = tipo[0]
+            var match = tipo.match(/\d+/);
+            let params = parseInt(match[0]);
             switch (tipo_pratico) {
                 case "A":
                     ver_input = respAlternativa()
@@ -218,7 +313,10 @@
                     ver_input = respString()
                     break
                 case "I":
-                    ver_input = respInt()
+                    ver_input = respInt(params)
+                    break
+                case "C":
+                    ver_input = respCheck()
                     break
             }
         }
@@ -237,7 +335,7 @@
         }
 
         showQuestion()
-        }
+    }
 
     function showQuestion(){
         var questionText = document.querySelector('p[class="question"]')
@@ -246,8 +344,10 @@
             questionText.textContent = questao.Pergunta
             questionText.setAttribute("Identificador", window.id_questao)
             let tipo = questao['Tipo de Resposta']
+            var match = tipo.match(/\d+/);
             if (/[A-Z]\d+/.test(tipo)){
                 let tipo_pratico = tipo[0]
+                let params = parseInt(match[0]);
                 switch (tipo_pratico) {
                     case "A":
                         plotAlternativas()
@@ -256,7 +356,10 @@
                         plotString()
                         break
                     case "I":
-                        plotInt()
+                        plotInt(params)
+                        break
+                    case "C":
+                        plotCheck()
                         break
                 }
             }
