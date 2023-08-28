@@ -21,7 +21,7 @@
 
 <div class="main">
 <br>
-<h1>Teste de Adequação de Investimentos</h1>
+<h1>Questionário personalizado</h1>
 <hr>
 <p class="question" id="question-text"></p>
 <div id="alternativasCircle">
@@ -280,7 +280,7 @@
     function showQuestion(){
         var questionText = document.querySelector('p[class="question"]')
         if (verificaFormato(window.stage)) {
-            questionText.textContent = `${formatarEtapa(window.stage)} de 3 - Aparecerá 2 opções, escolha a que você fica mais confortavel`
+            questionText.textContent = `Aparecerá 2 opções, escolha a que você prefere!`
             plotarRespostas()
         } else {
             questionText.textContent = `Em trabalho, numeros finais: \n${JSON.stringify(window.respostas).replaceAll(',','\n').replace('{',"\n").replace('}','')}`

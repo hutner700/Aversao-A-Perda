@@ -49,11 +49,11 @@ p.question {
     background-color: #eeeeee;
     padding: 16pt;
     border-radius: 16pt;
-    font-size: 36pt;
+    font-size: 24pt;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: justify;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 p.ideodesc {
@@ -67,9 +67,9 @@ p.ideodesc {
 h1 {
     color: #222222;
     font-family: 'Montserrat', sans-serif;
-    font-size: 72pt;
+    font-size: 48pt;
     text-align: center;
-    line-height: 72pt;
+    line-height: 48pt;
     margin-top: 0pt;
     margin-bottom: 0pt;
 }
@@ -510,9 +510,9 @@ li.nav a:hover:not(.active), #navres a:hover {
     outline: none;
 }
 
-/* Estilo quando o campo de entrada está ativo (com foco) */
+/* Estilo quando o campo de entrada estï¿½ ativo (com foco) */
 .input-button:focus {
-    box-shadow: 0 0 5px #2196f3; /* Adicione um efeito de destaque quando o campo está ativo */
+    box-shadow: 0 0 5px #2196f3; /* Adicione um efeito de destaque quando o campo estï¿½ ativo */
 }
 
 #alternativas {
@@ -523,7 +523,7 @@ li.nav a:hover:not(.active), #navres a:hover {
     min-height: 100px;
     width: 80%; /* Largura da div */
     margin: 0 auto; /* Centraliza horizontalmente */
-    padding: 20px; /* Espaçamento interno */
+    padding: 20px; /* Espaï¿½amento interno */
     margin-bottom: 5px;
 }
 
@@ -577,7 +577,7 @@ li.nav a:hover:not(.active), #navres a:hover {
     align-items: center;
     width: 80%; /* Largura da div */
     margin: 0 auto; /* Centraliza horizontalmente */
-    padding: 20px; /* Espaçamento interno */
+    padding: 20px; /* Espaï¿½amento interno */
     margin-bottom: 5px;
 }
 
@@ -626,6 +626,7 @@ li.nav a:hover:not(.active), #navres a:hover {
     max-width: 80%;
     width: auto;
     font-size: 3.5em !important;
+    text-align: center;
   }
 
   .small_button, .small_button_off {
