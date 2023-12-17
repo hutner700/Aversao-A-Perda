@@ -21,9 +21,9 @@
 
 <div class="main">
 <br>
-<h1>Questionário personalizado</h1>
+<h1>Elicitações</h1>
 <hr>
-<p class="question" id="question-text"></p>
+<p class="question" id="question-text" style="display: block; flex-direction: row;" ></p>
 <div id="alternativasCircle">
 
 </div>
@@ -36,19 +36,28 @@
     var questions = {
         "etapa1": 
             {
-                "Risk": "50% de chance de ganhar R$1000 <br> 50% de chance de não ganhar nada",
+                "Text":`<strong>Escolha o seu cenário: ganho certo ou ganho incerto?</strong> <br>
+                    Imagine que você investiu e verifica como esses investimentos estão indo:  <br>
+                    qual cenário você se sentiria mais confortável?`,
+                "Risk": "50% de chance de ganhar R$1.000 <br> 50% de chance de não ganhar nada",
                 "Safe": "ganho garantido de R${safe}",
                 "SafeNumber": 500
 
             },
         "etapa2":
             {
-                "Risk": " 50% de chance de ganhar R$1000 <br> 50% de chance de perder R${risk}",
+                "Text":`<strong> Escolha o seu cenário: tudo ou nada? </strong> <br>
+                        Imagine que você investiu e verifica como esses investimentos estão indo: <br>
+                        Qual cenário você se sentiria mais confortável?`,
+                "Risk": " 50% de chance de ganhar R$1.000 <br> 50% de chance de perder R${risk}",
                 "Safe": "não ganhar ou perder nada",
                 "RiskNumber": 1000
             },
         "etapa3":
             {
+                "Text":`<strong>Escolha o seu cenário: perda certa ou perda incerto?</strong> <br>
+                Imagine que você investiu e verifica como esses investimentos estão indo: <br>
+                qual cenário você se sentiria mais confortável?`,
                 "Risk": "50% de chance de não ganhar nem perder <br> 50% de chance de perder {risk}",
                 "Safe": "perda garantida de {safe}",
                 "RiskNumber": 440,
@@ -61,14 +70,14 @@
         if(colorRight) {
             const divCircleRisk = document.createElement("div");
             divCircleRisk.className = "circle";
-            divCircleRisk.style.background = `linear-gradient(to right, ${colorLeft} 50%, ${colorRight} 50%)`;
+            divCircleRisk.style.background = `linear-gradient(to bottom, ${colorLeft} 50%, ${colorRight} 50%)`;
 
             let riskLeftNumber = document.createElement("span")
-            riskLeftNumber.className = "number left"
+            riskLeftNumber.className = "number top"
             riskLeftNumber.innerHTML = textLeft
 
             let riskRightNumber = document.createElement("span")
-            riskRightNumber.className = "number right"
+            riskRightNumber.className = "number bottom"
             riskRightNumber.innerHTML = textRight
 
             divCircleRisk.appendChild(riskLeftNumber)
@@ -108,18 +117,20 @@
         alternativaSafe.classList.add('alternativa')
         alternativaSafe.classList.add('AltCircle')
 
+        let text_question = document.getElementById('question-text')
+        text_question.innerHTML = window.questions[window.stage].Text
 
         if (window.stage === "etapa1"){
 
-            let divCircleRisk = buildCircle("green",`+ R$1.000 <br> 50%`,"grey",`Sem Ganho <br> Ou Perda  <br> 50%`)
+            let divCircleRisk = buildCircle("green",`+ R$1.000 <br> 50%`,"grey",`Sem Ganho  <br> 50%`)
             alternativaRisk.appendChild(divCircleRisk)
 
-            let divCircleSafe = buildCircle("green",` + R$${questoes[window.stage].SafeNumber} <br> Com Certeza`)
+            let divCircleSafe = buildCircle("green",` + R$${questoes[window.stage].SafeNumber.toLocaleString('de-DE')} <br> Com Certeza`)
             alternativaSafe.appendChild(divCircleSafe)
 
         } else if (window.stage === "etapa2"){
 
-            let divCircleRisk = buildCircle("red",`- R$${questoes[window.stage].RiskNumber} <br> 50%`,"green",`+ R$1000 <br> 50%`)
+            let divCircleRisk = buildCircle("green",`+ R$1.000 <br> 50%`,"red",`- R$${questoes[window.stage].RiskNumber.toLocaleString('de-DE')} <br> 50%`)
             alternativaRisk.appendChild(divCircleRisk)
 
             let divCircleSafe = buildCircle("grey",`Sem Ganho <br> Ou Perda <br> Com Certeza`)
@@ -127,10 +138,10 @@
 
         } else if (window.stage === "etapa3") {
 
-            let divCircleRisk = buildCircle("red",`- R$${questoes[window.stage].RiskNumber} <br> 50%`,"grey",`Sem Ganho <br> Ou Perda <br> 50%`)
+            let divCircleRisk = buildCircle("red",`- R$${questoes[window.stage].RiskNumber.toLocaleString('de-DE')} <br> 50%`,"grey",`Sem Perda <br> 50%`)
             alternativaRisk.appendChild(divCircleRisk)
 
-            let divCircleSafe = buildCircle("red",` - R$${questoes[window.stage].SafeNumber} <br> Com Certeza`)
+            let divCircleSafe = buildCircle("red",` - R$${questoes[window.stage].SafeNumber.toLocaleString('de-DE')} <br> Com Certeza`)
             alternativaSafe.appendChild(divCircleSafe)
 
         }
@@ -139,7 +150,6 @@
         bloco_resps.appendChild(document.createElement("br"))
         bloco_resps.appendChild(alternativaRisk)
         bloco_resps.appendChild(document.createElement("br"))
-
     }
 
     function select(sel){
@@ -181,6 +191,9 @@
         }
         return padraoDetectado;
     }
+    function arredondar_multiplo(valor, multiple){
+        return(Math.round(valor / multiple) * multiple)
+    }
 
     function processo_etapa1(houve_torcao, selecionado){
         if(houve_torcao){
@@ -189,7 +202,7 @@
                 let ultima_movimentacao = window.respostas.etapa1[window.respostas.etapa1.length - 1]
                 window.stage = conversor[window.stage]
                 var multi = {"Safe": 5/6, "Risk":1.5}
-                window.respostas.etapa1 = Math.round(multi[ultima_movimentacao] * ultimo_numero / 5) * 5
+                window.respostas.etapa1 = arredondar_multiplo(multi[ultima_movimentacao] * ultimo_numero, 5)
                 showQuestion()
                 return ''
             }
@@ -198,7 +211,7 @@
         } else{
             window.questions.etapa1.SafeNumber = window.questions.etapa1.SafeNumber * 1.5
         }
-        window.questions.etapa1.SafeNumber = Math.round(window.questions.etapa1.SafeNumber / 5) * 5
+        window.questions.etapa1.SafeNumber = arredondar_multiplo(window.questions.etapa1.SafeNumber, 5)
         showQuestion()
     }
 
@@ -208,9 +221,10 @@
             let ultimo_numero = window.questions.etapa2.RiskNumber
             let ultima_movimentacao = window.respostas.etapa2[window.respostas.etapa2.length - 1]
             var multi = {"Safe": 5/6, "Risk": 1.5}
-            window.respostas.etapa2 = Math.round(multi[ultima_movimentacao] * ultimo_numero / 5) * 5
+            window.respostas.etapa2 = arredondar_multiplo(multi[ultima_movimentacao] * ultimo_numero, 5)
             window.stage = conversor[window.stage]
-            window.questions.etapa3.RiskNumber = window.respostas.etapa2
+            window.questions.etapa3.RiskNumber = arredondar_multiplo(window.respostas.etapa2, 10)
+            window.questions.etapa3.SafeNumber = window.questions.etapa3.RiskNumber / 2
             showQuestion()
             return ''
         }
@@ -219,7 +233,7 @@
         } else{
             window.questions.etapa2.RiskNumber = window.questions.etapa2.RiskNumber * 1.5
         }
-        window.questions.etapa2.RiskNumber = Math.round(window.questions.etapa2.RiskNumber / 5) * 5
+        window.questions.etapa2.RiskNumber =  arredondar_multiplo(window.questions.etapa2.RiskNumber, 5)
         showQuestion()
     }
 
@@ -229,7 +243,7 @@
             let ultimo_numero = window.questions.etapa3.SafeNumber
             let ultima_movimentacao = window.respostas.etapa3[window.respostas.etapa3.length - 1]
             var multi = {"Risk": 5/6, "Safe": 1.5}
-            window.respostas.etapa3 = Math.round(multi[ultima_movimentacao] * ultimo_numero / 5) * 5
+            window.respostas.etapa3 = arredondar_multiplo(multi[ultima_movimentacao] * ultimo_numero, 10)
             window.stage = conversor[window.stage]
             end()
             return ''
@@ -239,7 +253,7 @@
         } else{
             window.questions.etapa3.SafeNumber = window.questions.etapa3.SafeNumber * 1.5
         }
-        window.questions.etapa3.SafeNumber = Math.round(window.questions.etapa3.SafeNumber / 5) * 5
+        window.questions.etapa3.SafeNumber = arredondar_multiplo(window.questions.etapa3.SafeNumber, 5)
         showQuestion()
     }
     function end(_){
@@ -315,11 +329,9 @@
 
     function instruction(){
         var questionText = document.querySelector('p[class="question"]')
-        questionText.textContent = `Você deve escolher entre duas alternativas A e B. Para selecionar sua alternativa
-                                    preferida, clique na alternativa A (se preferir A) ou na alternativa B (se preferir B).
-                                    Por favor, preste atenção às cores e aos valores antes de escolher. Depois de
-                                    selecionar sua alternativa preferida, clique em OK para prosseguir para a
-                                    próxima pergunta. Por exemplo: O que você prefere?`
+        questionText.innerHTML = `Você será apresentado a duas alternativas, uma certa (A) e uma incerta (B), e deverá escolher entre uma delas. <br>
+                                    A alternativa A acontecerá com certeza, ou seja, com 100% de chance.<br> A alternativa B terá dois cenários, cada
+                                    um com 50% de chance de acontecer`
         var bloco_resps = document.querySelector('div[id="alternativasCircle"]')
         bloco_resps.innerHTML = ''
         let questoes = window.questions
