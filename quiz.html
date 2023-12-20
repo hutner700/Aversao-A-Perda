@@ -6,18 +6,6 @@
     <title data-i18n="title-quiz">Teste de Adequação de Investimentos</title>
     <meta charset="utf-8">
 </head>
-	
-<div class="navdiv">
-    <ul class="ulnav">
-        <li class="rvlogo"><b><a>Teste de Adequação de Investimentos</a></b></li>
-        <li class="nav"> <a href="index.html">
-        <span data-i18n="index">Pagina Inicial</span></a></li>
-        <li class="nav"> <a class="activenav" href="#">
-        <span data-i18n="inst-h2">Instruções</span></a></li>
-        <li class="nav"> <a href="quiz.html">
-        <span data-i18n="quiz"> Formulário </span></a></li>
-    </ul> 
-</div>
 
 <div class="main">
 <br>
@@ -27,7 +15,7 @@
 <div id="alternativasCircle">
 
 </div>
-    <button class="small_button" onclick="start_questions()" id="back_button" style="background-color: #2196f3; min-width: 500px;">Proxima</button>
+    <button class="small_button" onclick="start_questions()" id="back_button">Proxima</button>
 <br>
 
 </div>
@@ -103,7 +91,6 @@
 
         const alternativaRisk = document.createElement("button")
         alternativaRisk.className = 'button';
-        alternativaRisk.style.backgroundColor = '#4caf50';
         alternativaRisk.setAttribute("ID","Risk")
         alternativaRisk.setAttribute("onclick", `select("Risk")`);
         alternativaRisk.classList.add('alternativa')
@@ -111,7 +98,6 @@
 
         var alternativaSafe = document.createElement("button")
         alternativaSafe.className = 'button';
-        alternativaSafe.style.backgroundColor = '#4caf50';
         alternativaSafe.setAttribute("ID","Safe")
         alternativaSafe.setAttribute("onclick", `select("Safe")`);
         alternativaSafe.classList.add('alternativa')
@@ -121,27 +107,63 @@
         text_question.innerHTML = window.questions[window.stage].Text
 
         if (window.stage === "etapa1"){
+            let textoRisk = `<strong>Alternativa B</strong> <br>
+                           <strong>50%</strong> chance de ganhar<br>
+                          <strong>50%</strong> chance de não ter ganho`
+            let elemento_textoRisk = document.createElement('p')
+            elemento_textoRisk.innerHTML = textoRisk
+
+            let textoSafe = "<strong>Alternativa A</strong><br>Ganho<strong> com certeza</strong> <br> ‎"
+            let elemento_textoSafe = document.createElement('p')
+            elemento_textoSafe.innerHTML = textoSafe
+
 
             let divCircleRisk = buildCircle("green",`+ R$1.000 <br> 50%`,"grey",`Sem Ganho  <br> 50%`)
+            alternativaRisk.appendChild(elemento_textoRisk)
             alternativaRisk.appendChild(divCircleRisk)
 
             let divCircleSafe = buildCircle("green",` + R$${questoes[window.stage].SafeNumber.toLocaleString('de-DE')} <br> Com Certeza`)
+            alternativaSafe.appendChild(elemento_textoSafe)
             alternativaSafe.appendChild(divCircleSafe)
 
         } else if (window.stage === "etapa2"){
+            let textoRisk = `<strong>Alternativa B</strong> <br>
+                           <strong>50%</strong> chance de ganhar<br>
+                          <strong>50%</strong> chance de perder`
+            let elemento_textoRisk = document.createElement('p')
+            elemento_textoRisk.innerHTML = textoRisk
+
+            let textoSafe = "<strong>Alternativa A</strong><br>Sem ganho ou perda <br> <strong> com certeza</strong>"
+            let elemento_textoSafe = document.createElement('p')
+            elemento_textoSafe.innerHTML = textoSafe
+
 
             let divCircleRisk = buildCircle("green",`+ R$1.000 <br> 50%`,"red",`- R$${questoes[window.stage].RiskNumber.toLocaleString('de-DE')} <br> 50%`)
+            alternativaRisk.appendChild(elemento_textoRisk)
             alternativaRisk.appendChild(divCircleRisk)
 
             let divCircleSafe = buildCircle("grey",`Sem Ganho <br> Ou Perda <br> Com Certeza`)
+            alternativaSafe.appendChild(elemento_textoSafe)
             alternativaSafe.appendChild(divCircleSafe)
 
         } else if (window.stage === "etapa3") {
+            let textoRisk = `<strong>Alternativa B</strong> <br>
+                           <strong>50%</strong> chance de perder<br>
+                          <strong>50%</strong> chance de não perder`
+            let elemento_textoRisk = document.createElement('p')
+            elemento_textoRisk.innerHTML = textoRisk
+
+            let textoSafe = "<strong>Alternativa A</strong><br>Perda <strong>com certeza</strong> <br> ‎"
+            let elemento_textoSafe = document.createElement('p')
+            elemento_textoSafe.innerHTML = textoSafe
+
 
             let divCircleRisk = buildCircle("red",`- R$${questoes[window.stage].RiskNumber.toLocaleString('de-DE')} <br> 50%`,"grey",`Sem Perda <br> 50%`)
+            alternativaRisk.appendChild(elemento_textoRisk)
             alternativaRisk.appendChild(divCircleRisk)
 
             let divCircleSafe = buildCircle("red",` - R$${questoes[window.stage].SafeNumber.toLocaleString('de-DE')} <br> Com Certeza`)
+            alternativaSafe.appendChild(elemento_textoSafe)
             alternativaSafe.appendChild(divCircleSafe)
 
         }
@@ -161,7 +183,6 @@
         safe.classList.remove("Selected");
         if (sel){
             var selected = document.getElementById(sel);
-            selected.style.border = "5px solid red"
             selected.classList.add("Selected")
         }
     }
@@ -296,8 +317,6 @@
         if (verificaFormato(window.stage)) {
             questionText.textContent = `Aparecerá 2 opções, escolha a que você prefere!`
             plotarRespostas()
-        } else {
-            questionText.textContent = `Em trabalho, numeros finais: \n${JSON.stringify(window.respostas).replaceAll(',','\n').replace('{',"\n").replace('}','')}`
         }
     }
 
@@ -321,7 +340,6 @@
         safe.classList.remove("Selected");
         if (sel){
             let selected = document.getElementById(sel);
-            selected.style.border = "5px solid red"
             selected.classList.add("Selected")
         }
 

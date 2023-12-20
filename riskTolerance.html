@@ -8,28 +8,15 @@
 <link rel="shortcut icon" type="image/png" href="icon.png">
 <meta charset="utf-8">
 </head>
-	
-<div class="navdiv">
-    <ul class="ulnav">
-        <li class="rvlogo"><b><a>Teste de Adequação de Investimentos</a></b></li></b><br>
-        <li class="nav"> <a href="index.html">
-        <span data-i18n="index">Pagina Inicial</span></a></li>
-        <li class="nav"> <a href="instructions.html">
-        <span data-i18n="inst-h2">Instruções</span></a></li>
-        <li class="nav"> <a class="activenav">
-        <span data-i18n="quiz"> Formulário </span></a></li>
-    </ul> 
-</div>
-
 <div class="main">
 <br>
-<h1>Questionário de tolerância ao risco</h1>
+<h1>Tolerância ao risco</h1>
 <hr>
 <p class="question" id="question-text"></p>
 <div id="alternativas">
     <button class="button" onclick="next_question( 1.0)" style="background-color: #2196f3;">Carregando...</button> <br>
 </div>
-    <button class="small_button" onclick="next_question()" id="back_button" style="background-color: #2196f3; min-width: 500px;">Proxima</button>
+    <button class="small_button" onclick="next_question()" id="back_button">Proxima</button>
 <br>
 </div>
 <script>
@@ -83,25 +70,22 @@
     }
 
     function selectAlternativa(alternativa){
-        const elementosComBorder = document.querySelectorAll('button[style*="border"]');
+        const elementosComBorder = document.querySelectorAll('.Selected');
 
         elementosComBorder.forEach(elemento => {
             elemento.style.removeProperty('border')
             elemento.classList.remove("Selected")
         });
-        console.log(alternativa)
+
         const elementoComAtributoX = document.querySelector(`button[alternativa="${alternativa}"]`);
-        elementoComAtributoX.style.border = "5px solid red"
         elementoComAtributoX.classList.add("Selected")
     }
 
     function selectCheck(alternativa){
         const elementoComAtributoX = document.querySelector(`button[alternativa="${alternativa}"]`);
-        if (elementoComAtributoX.style.border) {
-            elementoComAtributoX.style.removeProperty('border')
+        if (elementoComAtributoX.classList.contains('Selected')) {
             elementoComAtributoX.classList.remove("Selected")
         } else {
-            elementoComAtributoX.style.border = "5px solid red"
             elementoComAtributoX.classList.add("Selected")
         }
     }
@@ -115,7 +99,6 @@
         for (let i = 1; i <= parseInt(questao['Tipo de Resposta'].match(regex)[1]); i++) {
             let alternativa = document.createElement("button")
             alternativa.className = 'button';
-            alternativa.style.backgroundColor = '#4caf50';
             alternativa.setAttribute("Alternativa",i)
             alternativa.textContent = questao[`Alternativa ${i}`]
             alternativa.setAttribute("onclick",`selectAlternativa("${i}")`);
@@ -132,7 +115,6 @@
         for (let i = 1; i <= parseInt(questao['Tipo de Resposta'].match(regex)[1]); i++) {
             let alternativa = document.createElement("button")
             alternativa.className = 'button';
-            alternativa.style.backgroundColor = '#4caf50';
             alternativa.setAttribute("Alternativa",i)
             alternativa.textContent = questao[`Alternativa ${i}`]
             alternativa.setAttribute("onclick",`selectCheck("${i}")`);

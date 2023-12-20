@@ -1,17 +1,16 @@
 html {
-    background-color: #bdc3c7
+    height: 100%;
 }
 body {
-    width: 90%;
-    min-height: calc(100vh - 4em);
+    width: 100%;
+    height: 100%;
     margin: 0 auto;
     background-color: #e5e5e5;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 div.main {
-    margin-left: 16%;
-    padding: 1px 16px;
-    min-height: 900px 
+    height: 100%;
+    width: 100%;
 }
 div.element {
     width: 85%;
@@ -26,13 +25,10 @@ div.tablang {
 }
 p {
     color: #444444;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Arial', serif;
     font-size: 16pt;
     line-height: 1;
     margin: 4pt;
-}
-body.__i18n-ko p {
-    line-height: 140%
 }
 p.value-description {
     text-indent: -16pt;
@@ -41,12 +37,11 @@ p.value-description {
 p.question {
     margin: 16pt auto;
     color: #333333;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Arial', serif;
     font-weight: normal;
-    width: 70%;
+    width: 40%;
     min-width: 500pt;
     min-height: 144pt;
-    background-color: #eeeeee;
     padding: 16pt;
     border-radius: 16pt;
     font-size: 24pt;
@@ -54,58 +49,53 @@ p.question {
     justify-content: center;
     align-items: center;
     text-align: justify;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 p.ideodesc {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Arial', serif;
     color: #333333;
     font-size: 18pt;
     line-height: 18pt;
     margin-top: 12pt;
-    margin-bottom: 0pt;
+    margin-bottom: 0;
 }
 h1 {
     color: #222222;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 48pt;
+    font-family: 'Arial', serif;
+    font-size: 32pt;
     text-align: center;
-    line-height: 48pt;
-    margin-top: 0pt;
-    margin-bottom: 0pt;
+    line-height: 32pt;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 h2 {
     color: #333333;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Arial', serif;
     font-size: 36pt;
     line-height: 36pt;
     margin-top: 12pt;
-    margin-bottom: 0pt;
-}
-body.__i18n-ko h2 {
-    line-height: 120%;
-    margin-top: 0.5em
+    margin-bottom: 0;
 }
 h3 {
     color: #333333;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Arial', serif;
     font-size: 18pt;
     line-height: normal;
     margin-top: 12pt;
-    margin-bottom: 0pt;
+    margin-bottom: 0;
 }
 li {
     font-size: 16pt;
     text-indent: 16pt;
 }
 dt {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Arial', serif;
 }
 dd {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Arial', serif;
     margin-bottom: 12pt;
 }
 a {
-    font-family: inherit;
+    font-family: 'Arial', serif;
 }
 img.center {
     display: block;
@@ -115,7 +105,7 @@ img.center {
 }
 .button {
     background-color: #2196f3;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Arial', serif;
     border: none;
     border-radius: 8pt;
     color: white;
@@ -129,15 +119,15 @@ img.center {
     margin: -2px auto;
     cursor: pointer;
 }
-.small_button, .small_button_off {
-    background-color: #333;
-    font-family: 'Montserrat', sans-serif;
+.small_button {
+    background-color: #73b7dc;
+    font-family: 'Arial', serif;
     border: none;
     border-radius: 8pt;
-    color: white;
+    color: black;
     padding: 8pt;
     width: 15%;
-    min-width: 150pt;
+    min-width: 500px;
     text-align: center;
     text-decoration: none;
     display: block;
@@ -182,12 +172,8 @@ canvas {
     border-width: 2px;
     border-radius: 8pt;
     display: block;
-    margin: 8pt;
-    margin-left: 38%;
-    margin-right: 22%;
-    margin-bottom: -1%;
+    margin: 8pt 22% -1% 38%;
     width: 40%;
-    display: block;
 }
 img.index {
     border-color: #444444;
@@ -259,15 +245,14 @@ div.navdiv {
 ul.ulnav {
   list-style-type: none;
   margin: 0;
-  padding: 0;
-  padding-top: 10px;
-  width: 14%;
+    padding: 10px 0 0;
+    width: 14%;
   background-color: #f1f1f1;
   position: fixed;
   height: 100%;
   overflow: auto;
   border-right: 10px solid white;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Arial', serif;
 }
 
 li.nav a {
@@ -277,12 +262,6 @@ li.nav a {
   text-decoration: none;
 }
 
-rvlogo.nav a {
-  display: block;
-  color: #444;
-  padding: 8px 16px;
-  text-decoration: none;
-}
 
 #navres a {
   display: block;
@@ -315,7 +294,7 @@ li.nav a:hover:not(.active), #navres a:hover {
 }
 
 .input-button {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Arial', serif;
     border: none;
     border-radius: 8pt;
     padding: 8pt;
@@ -340,9 +319,20 @@ li.nav a:hover:not(.active), #navres a:hover {
     align-items: center;
     min-height: 100px;
     width: 80%; /* Largura da div */
-    margin: 0 auto; /* Centraliza horizontalmente */
+    /* Centraliza horizontalmente */
     padding: 20px; /* Espa�amento interno */
-    margin-bottom: 5px;
+    margin: 0 auto 5px;
+}
+#alternativas .button {
+    background: lightgrey;
+    text-align: left;
+    position: relative;
+    color:black;
+}
+#alternativas .button:after {
+    content: ">";
+    position: absolute;
+    right: 2%;
 }
 
 #alternativas * {
@@ -353,14 +343,20 @@ li.nav a:hover:not(.active), #navres a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 300px;
-    min-width: 300px;
-    background: #555555;
+    min-height: 350px;
+    width: 30%;
+    min-width: 100px;
+    max-width: 350px;
+    background: lightgray;
+    flex-direction: column;
+    margin: 2px;
 }
 
 .circle {
-    width: 300px;
-    height: 300px;
+    width: 85%;
+    height: 100%;
+    min-width: 200px;
+    min-height: 250px;
     border-radius: 50%;
     background: linear-gradient(to right, green 50%, red 50%);
     position: relative;
@@ -391,11 +387,11 @@ li.nav a:hover:not(.active), #navres a:hover {
 }
 
 .circle .top {
-    top: 30%; /* Inicia no topo do círculo */
-    height: 50%; /* Ocupa metade da altura do círculo */
+    top: 30%;
+    height: 10%;
     display: flex;
-    align-items: center; /* Centraliza verticalmente dentro da metade superior */
-    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;
+    justify-content: center;
 }
 
 .circle .bottom {
@@ -410,14 +406,18 @@ li.nav a:hover:not(.active), #navres a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%; /* Largura da div */
-    margin: 0 auto; /* Centraliza horizontalmente */
+    width: 90%; /* Largura da div */
+    /* Centraliza horizontalmente */
     padding: 20px; /* Espa�amento interno */
-    margin-bottom: 5px;
+    margin: 0 auto 5px;
 }
 
-#alternativasCircle * {
-    margin: 5px;
+#alternativasCircle .AltCircle {
+    margin: 10px;
+}
+
+#alternativasCircle .Selected, #alternativas .Selected{
+    border: 3px solid black
 }
 
 
@@ -427,10 +427,10 @@ li.nav a:hover:not(.active), #navres a:hover {
   }
 
   div.main {
-    margin-left: 0%;
+    margin-left: 0;
     min-height: 0;
 	width: auto !important;
-	border-width: 0px !important;  
+	border-width: 0 !important;
   }
   body {
     width: auto;
@@ -449,19 +449,19 @@ li.nav a:hover:not(.active), #navres a:hover {
     width: 80%;
   }
   .button {
-    min-width: 0px;
+    min-width: 0;
     max-width: 80%;
     width: 80%;
     font-size: 2.5em !important; 
   }
-  
+
   p.question {
     min-height: 224px;
-    min-width: 0px;
+    min-width: 0;
     max-width: 80%;
     width: auto;
     font-size: 3.5em !important;
-    text-align: center;
+    text-align: justify;
   }
 
   .small_button, .small_button_off {
