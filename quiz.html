@@ -15,7 +15,7 @@
 <div id="alternativasCircle">
 
 </div>
-    <button class="small_button" onclick="start_questions()" id="back_button">Proxima</button>
+    <button class="small_button" onclick="start_questions()" id="back_button" style="display: none">Proxima</button>
 <br>
 
 </div>
@@ -80,7 +80,6 @@
             riskLeftNumber.innerHTML = textLeft
             divCircleRisk.appendChild(riskLeftNumber)
             return divCircleRisk
-
         }
     }
 
@@ -186,6 +185,7 @@
             var selected = document.getElementById(sel);
             selected.classList.add("Selected")
         }
+        next_question()
     }
 
 
@@ -343,7 +343,7 @@
             let selected = document.getElementById(sel);
             selected.classList.add("Selected")
         }
-
+        start_questions()
     }
 
     function instruction(){
