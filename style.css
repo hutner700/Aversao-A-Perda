@@ -1,16 +1,29 @@
 html {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
 }
 body {
-    width: 100%;
+    width: 80%;
     height: 100%;
     margin: 0 auto;
     background-color: #e5e5e5;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
 }
+
 div.main {
     height: 100%;
     width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
 }
 div.element {
     width: 85%;
@@ -39,12 +52,12 @@ p.question {
     color: #333333;
     font-family: 'Arial', serif;
     font-weight: normal;
-    width: 40%;
-    min-width: 500pt;
-    min-height: 144pt;
+    width: 60%;
+    min-width: 300pt;
+    min-height: 80pt;
     padding: 16pt;
     border-radius: 16pt;
-    font-size: 24pt;
+    font-size: 18pt;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,21 +139,14 @@ img.center {
     border-radius: 8pt;
     color: black;
     padding: 8pt;
-    width: 15%;
-    min-width: 500px;
+    min-width: 100px;
     text-align: center;
     text-decoration: none;
     display: block;
     font-size: 18pt;
-    margin: -2px auto;
+    margin-left: auto;
+    margin-right: 21%;
     cursor: pointer;
-}
-.small_button_off {
-    background-color: #ddd;
-    color: #888;
-    border: 2px solid #888;
-    cursor: not-allowed;
-    margin: -4px auto;
 }
 div.axis {
     width: 100%;
@@ -226,10 +232,20 @@ img.allvalues {
 }
 
 .tabcontent {
-  display: block;
+  display: flex;
+  flex-direction: column;
   padding: 6px 12px;
   border-top: none;
-  animation: fadeEffect 1s; 
+  animation: fadeEffect 1s;
+  align-content: center;
+    width: 60%;
+}
+.pdf-container{
+    align-self: center;
+}
+p.index_text{
+  margin: 10px;
+  text-align: justify;
 }
 
 @keyframes fadeEffect {
@@ -301,7 +317,7 @@ li.nav a:hover:not(.active), #navres a:hover {
     width: 50%;
     min-width: 500pt;
     text-align: center;
-    font-size: 36pt;
+    font-size: 24pt;
     margin: -2px auto;
     cursor: pointer;
     outline: none;
@@ -328,6 +344,7 @@ li.nav a:hover:not(.active), #navres a:hover {
     text-align: left;
     position: relative;
     color:black;
+    font-size: 22px;
 }
 #alternativas .button:after {
     content: ">";
@@ -457,14 +474,13 @@ li.nav a:hover:not(.active), #navres a:hover {
 
   p.question {
     min-height: 224px;
-    min-width: 0;
     max-width: 80%;
     width: auto;
     font-size: 3.5em !important;
     text-align: justify;
   }
 
-  .small_button, .small_button_off {
+  .small_button{
     font-size: 5em;
   }
 }

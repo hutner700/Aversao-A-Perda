@@ -28,13 +28,6 @@
     let questions
     let ids_questao = []
 
-    function validated_input(){
-        if (window.id_questao === "6"){
-
-        }
-
-    }
-
     function encontrarElementosPorChave(dados, chave, valorDesejado) {
         if (Array.isArray(dados)) {
             // Se for uma matriz
@@ -54,21 +47,23 @@
     }
 
     function proximaChave() {
-        const chaves = Object.keys(window.questions);
-        const indiceAtual = chaves.indexOf(window.chave_questao);
+        var chaves = Object.keys(window.questions);
+        var indiceAtual = chaves.indexOf(window.chave_questao);
+        if (window.chave_questao == chaves.length){
+            return false
+        }
         window.chave_questao = Object.keys(window.questions)[indiceAtual + 1]
         window.id_questao = window.questions[window.chave_questao].Identificacao
         if (window.id_questao) {
             window.tipo_questao = removerCaracteresEspeciais(window.questions[window.chave_questao]['Tipo de Resposta'])
             return true
         } else {
-            return false; // Não há próxima chave
+            return false;
         }
     }
 
 
     async function loadedScript() {
-        // Aqui você pode chamar as funções definidas no script importado
         window.questions = await pegarQuestions(file)
         window.chave_questao = Object.keys(window.questions)[0]
         window.id_questao = window.questions[window.chave_questao].Identificacao
@@ -86,16 +81,18 @@
 
         const elementoComAtributoX = document.querySelector(`button[alternativa="${alternativa}"]`);
         elementoComAtributoX.classList.add("Selected")
+        next_question()
     }
 
-    function selectCheck(alternativa){
-        const elementoComAtributoX = document.querySelector(`button[alternativa="${alternativa}"]`);
-        if (elementoComAtributoX.classList.contains('Selected')) {
-            elementoComAtributoX.classList.remove("Selected")
+    function sumirBotaoProximo(sumir) {
+        let botao = document.querySelector("#back_button");
+        if (sumir) {
+            botao.style.display = 'none';
         } else {
-            elementoComAtributoX.classList.add("Selected")
+            botao.style.display = 'block';
         }
     }
+
 
     function plotAlternativas(){
         const regex = /A(\d+)/;
@@ -111,22 +108,7 @@
             alternativa.setAttribute("onclick",`selectAlternativa("${i}")`);
             aswnerBox.appendChild(alternativa)
         }
-    }
-
-    function plotCheck(){
-        const regex = /C(\d+)/;
-
-        const aswnerBox = document.querySelector('div[id="alternativas"]')
-        aswnerBox.innerHTML = ''
-        const questao = window.questions[window.chave_questao]
-        for (let i = 1; i <= parseInt(questao['Tipo de Resposta'].match(regex)[1]); i++) {
-            let alternativa = document.createElement("button")
-            alternativa.className = 'button';
-            alternativa.setAttribute("Alternativa",i)
-            alternativa.textContent = questao[`Alternativa ${i}`]
-            alternativa.setAttribute("onclick",`selectCheck("${i}")`);
-            aswnerBox.appendChild(alternativa)
-        }
+        sumirBotaoProximo(true)
     }
 
     function plotString(){
@@ -136,7 +118,9 @@
         stringInput.classList.add('input-button')
 
         aswnerBox.appendChild(stringInput)
+        sumirBotaoProximo(false)
     }
+
     function plotInt(params){
         let aswnerBox = document.querySelector('div[id="alternativas"]')
         aswnerBox.innerHTML = ''
@@ -170,6 +154,7 @@
             }
 
         }
+        sumirBotaoProximo(false)
     }
 
     function respAlternativa(){
@@ -186,27 +171,7 @@
 
     }
 
-    function respCheck(){
-        let aswnerBox = document.querySelector('div[id="alternativas"]')
-
-        let selectedButtons = aswnerBox.querySelectorAll('button.Selected');
-
-        if(selectedButtons.length === 0){
-            alert("Selecione uma opção!")
-            return false
-        }
-
-        let respostas = []
-        selectedButtons.forEach(elemento => {
-            respostas.push(elemento.getAttribute('alternativa'))
-        });
-
-        window.resposta[window.id_questao] = respostas
-        return true
-    }
-
     function respString(){
-        // todo: multiplas strings input
         const input_box = document.querySelector('#alternativas > input')
         if(!input_box.value){
             alert("A resposta está vazia")
@@ -341,9 +306,6 @@
                         break
                     case "I":
                         plotInt(params)
-                        break
-                    case "C":
-                        plotCheck()
                         break
                 }
             }

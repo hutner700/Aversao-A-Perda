@@ -172,6 +172,7 @@
         bloco_resps.appendChild(document.createElement("br"))
         bloco_resps.appendChild(alternativaRisk)
         bloco_resps.appendChild(document.createElement("br"))
+        ajustarTam()
     }
 
     function select(sel){
@@ -387,8 +388,25 @@
         bloco_resps.appendChild(document.createElement("br"))
         bloco_resps.appendChild(alternativaRisk)
         bloco_resps.appendChild(document.createElement("br"))
-
     }
+     function ajustarTam() {
+        let maxDimension = 0;
+        let elements = document.querySelectorAll('.AltCircle');
+
+        // Encontrar o maior elemento
+        elements.forEach(function(el) {
+            let dimension = Math.max(el.offsetWidth, el.offsetHeight);
+            if (dimension > maxDimension) {
+                maxDimension = dimension;
+            }
+        });
+
+        // Aplicar o maior tamanho a todos os elementos
+        elements.forEach(function(el) {
+            el.style.width = `${maxDimension}px`;
+            el.style.height = `${maxDimension}px`;
+        });
+    };
 
     instruction()
 </script>
