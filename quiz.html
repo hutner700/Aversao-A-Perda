@@ -86,6 +86,7 @@
     function plotarRespostas(){
         var bloco_resps = document.querySelector('div[id="alternativasCircle"]')
         bloco_resps.innerHTML = ''
+        bloco_resps.style = ''
         let questoes = window.questions
 
         const alternativaRisk = document.createElement("button")
@@ -121,7 +122,7 @@
             alternativaRisk.appendChild(elemento_textoRisk)
             alternativaRisk.appendChild(divCircleRisk)
 
-            let divCircleSafe = buildCircle("green",` + R$${questoes[window.stage].SafeNumber.toLocaleString('de-DE')} <br> Com Certeza`)
+            let divCircleSafe = buildCircle("green",` + R$${questoes[window.stage].SafeNumber.toLocaleString('de-DE')}`)
             alternativaSafe.appendChild(elemento_textoSafe)
             alternativaSafe.appendChild(divCircleSafe)
 
@@ -141,7 +142,7 @@
             alternativaRisk.appendChild(elemento_textoRisk)
             alternativaRisk.appendChild(divCircleRisk)
 
-            let divCircleSafe = buildCircle("grey",`Sem Ganho <br> Ou Perda <br> Com Certeza`)
+            let divCircleSafe = buildCircle("grey",`Sem Ganho <br> Ou Perda`)
             alternativaSafe.appendChild(elemento_textoSafe)
             alternativaSafe.appendChild(divCircleSafe)
 
@@ -161,7 +162,7 @@
             alternativaRisk.appendChild(elemento_textoRisk)
             alternativaRisk.appendChild(divCircleRisk)
 
-            let divCircleSafe = buildCircle("red",` - R$${questoes[window.stage].SafeNumber.toLocaleString('de-DE')} <br> Com Certeza`)
+            let divCircleSafe = buildCircle("red",` - R$${questoes[window.stage].SafeNumber.toLocaleString('de-DE')}`)
             alternativaSafe.appendChild(elemento_textoSafe)
             alternativaSafe.appendChild(divCircleSafe)
 
@@ -372,14 +373,16 @@
         alternativaSafe.classList.add('AltCircle')
 
         var img1 = document.createElement("img");
-        img1.src = "img/1 Pizza.png";
+        img1.src = "img/2.svg";
         img1.alt = "Imagem 1";
-        img1.style.minHeight = "250px";
+        img1.width = 300
+        img1.height = 500
 
         var img2 = document.createElement("img");
-        img2.src = "img/Pizza Cara Coroa.png";
+        img2.src = "img/1.svg";
         img2.alt = "Imagem 2";
-        img2.style.minHeight = "250px";
+        img2.width = 300
+        img2.height = 500
 
         alternativaSafe.appendChild(img1)
         alternativaRisk.appendChild(img2)
