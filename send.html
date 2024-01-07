@@ -103,7 +103,7 @@
                 perfil = "Cauteloso"
                 descr = "Extremamente focado em segurança, o investidor cauteloso se desvia de riscos que possam levar a perdas, escolhendo investimentos de renda fixa com garantias fortes e sacrificando a possibilidade de lucros maiores. Mesmo que isso possa resultar em ganhos que não superam a inflação, a preservação do capital é a sua maior preocupação, como indicado por um valor de λ que representa uma forte aversão a perdas.";
             }
-            resultado.innerHTML = `Seu resultado na pesquisa foi: λ = ${coeficiente} <br>
+            resultado.innerHTML = `Seu resultado na pesquisa foi: λ = ${coeficiente.toFixed(2)} <br>
                                     <div>Seu perfil é: <strong>${perfil}</strong> </div> <br>
                                     ${descr}`
         }
