@@ -22,9 +22,12 @@
     Agradecemos a participação, estamos enviando as respostas!<br>
     Status: <span id="statusSend" style="font-size: 36pt; color:red">Não enviado... Aguarde!</span>
 </p>
+<p class="resultado" style="display: flex;flex-direction: column; align-items: flex-start">
+    Seu resultado na pesquisa foi:<br>
+    Status: Calculando
+</p>
 <br>
 <br>
-<button class="button" style="background-color: red" id="restartbutton" >Reenviar</button>
 <a class="button" href="https://sites.google.com/view/seuperfildeinvestidor/" style="margin-top: 10px">Ver os perfis de aversão à perda</a>
 
 
@@ -33,54 +36,80 @@
 
     <script type="text/javascript">
 
-        document.getElementById("restartbutton").addEventListener("click", function() {
-            document.getElementById("restartbutton").disabled = true;
-            alterarStatus(false)
-            sendInformation()
-            setTimeout(() => {document.getElementById("restartbutton").disabled = false }, 10000)
-            });
+    function alterarStatus(status = true){
+        const not_send_text = "Não enviado... Aguarde!"
+        const send_text = "Enviado!"
+        const not_send_color = "red"
+        const send_color = "blue"
 
-        document.getElementById("restartbutton").disabled = true;
-
-        function alterarStatus(status = true){
-            const not_send_text = "Não enviado... Aguarde!"
-            const send_text = "Enviado!"
-            const not_send_color = "red"
-            const send_color = "blue"
-
-            const elemento = document.getElementById("statusSend");
-            if (status) {
-                elemento.textContent = send_text
-                elemento.style.color = send_color
-            } else {
-                elemento.textContent = not_send_text
-                elemento.style.color = not_send_color
-            }
+        const elemento = document.getElementById("statusSend");
+        if (status) {
+            elemento.textContent = send_text
+            elemento.style.color = send_color
+        } else {
+            elemento.textContent = not_send_text
+            elemento.style.color = not_send_color
         }
+    }
 
-        function sendInformation(){
-            let data = {}
-            data.SocioEconomics = JSON.parse(localStorage.SocioEconomics)
-            data.RiskAverssion = JSON.parse(localStorage.RiskAverssion)
-            data.Quiz = JSON.parse(localStorage.Quiz)
+    function sendInformation(){
+        let data = {}
+        data.SocioEconomics = JSON.parse(localStorage.SocioEconomics)
+        data.RiskAverssion = JSON.parse(localStorage.RiskAverssion)
+        data.Quiz = JSON.parse(localStorage.Quiz)
 
-            let jsonData = JSON.stringify(data);
+        let jsonData = JSON.stringify(data);
 
-            let encodedData = encodeURIComponent(jsonData);
+        let encodedData = encodeURIComponent(jsonData);
 
-            let url = `https://script.google.com/macros/s/AKfycby7vlwGMpMw36HLgxlYpsP4C7g0GK5a2rVUHdUeyNDGzlYGSzv6zlXLmx0vVpor3hI3tQ/exec?data=${encodedData}`;
+        let url = `https://script.google.com/macros/s/AKfycby7vlwGMpMw36HLgxlYpsP4C7g0GK5a2rVUHdUeyNDGzlYGSzv6zlXLmx0vVpor3hI3tQ/exec?data=${encodedData}`;
 
-            fetch(url, {
-                method: "GET"
-            }).then(response => {
-                alterarStatus()
+        fetch(url, {
+            method: "GET"
+        }).then(response => {
+            alterarStatus()
+        })
+            .catch(error => {
+                console.error("Erro", error);
             })
-                .catch(error => {
-                    console.error("Erro", error);
-                })
-            document.getElementById("restartbutton").disabled = false;
-        }
+        document.getElementById("restartbutton").disabled = false;
+    }
+    function calcularEExibirCoeficiente() {
+        if (localStorage.Quiz) {
+            const quiz = JSON.parse(localStorage.Quiz);
+            const coeficiente = quiz.etapa1 / quiz.etapa3;
+            let resultado = document.querySelector(".resultado")
 
+
+            // Determinando o perfil
+            let perfil = "";
+            let descr = "";
+            if (coeficiente < 0.5) {
+                perfil = "Aventureiro"
+                descr = "O investidor aventureiro é impulsionado pela busca de altos rendimentos e está preparado para enfrentar riscos significativos no mercado. Este perfil não se intimida com a possibilidade de perdas substanciais e se concentra intensamente em maximizar os ganhos, evidenciado por um valor de λ que reflete uma forte inclinação para buscar altos retornos em vez de priorizar a segurança.";
+            } else if (coeficiente < 1) {
+                perfil = "Arrojado"
+                descr = "O perfil arrojado combina a busca por rentabilidade elevada com uma dose de prudência. Embora esteja disposto a assumir riscos consideráveis, há uma cautela subjacente que orienta suas escolhas de investimento. Com um valor de λ que denota uma busca moderada por ganhos, o investidor arrojado equilibra seu desejo de lucros com uma sensatez na hora de evitar perdas.";
+            } else if (coeficiente < 1.75) {
+                perfil = "Moderado"
+                descr = "O investidor moderado valoriza um equilíbrio entre risco e retorno, optando por riscos calculados em busca de uma rentabilidade sólida. Este perfil adapta suas estratégias de investimento conforme as flutuações do mercado, e o valor de λ indica uma aversão à perda que varia de neutra a ligeiramente baixa, refletindo uma postura equilibrada em relação a ganhos e segurança.";
+            } else if (coeficiente < 2.5) {
+                perfil = "Equilibrado"
+                descr = "Investidores equilibrados preferem uma harmonia entre lucratividade e segurança, estando abertos a riscos moderados. Este perfil prioriza a preservação do capital e está disposto a aceitar riscos baixos a moderados em busca de rendimentos. Com uma preferência por investimentos de baixo risco e alta liquidez, o λ deste investidor sugere uma cautela um pouco mais acentuada contra perdas.";
+            } else if (coeficiente < 4) {
+                perfil = "Conservador"
+                descr = "O conservador é um perfil que coloca a proteção do capital em primeiro lugar, preferindo riscos mínimos e valorizando investimentos seguros e relativamente líquidos. Esse investidor evita riscos de perda quase a qualquer custo, optando por aplicações de renda fixa com garantias robustas. Seu valor de λ reflete uma aversão significativa à perda, priorizando a segurança sobre ganhos potenciais.";
+            } else {
+                perfil = "Cauteloso"
+                descr = "Extremamente focado em segurança, o investidor cauteloso se desvia de riscos que possam levar a perdas, escolhendo investimentos de renda fixa com garantias fortes e sacrificando a possibilidade de lucros maiores. Mesmo que isso possa resultar em ganhos que não superam a inflação, a preservação do capital é a sua maior preocupação, como indicado por um valor de λ que representa uma forte aversão a perdas.";
+            }
+            resultado.innerHTML = `Seu resultado na pesquisa foi: λ = ${coeficiente} <br>
+                                    <div>Seu perfil é: <strong>${perfil}</strong> </div> <br>
+                                    ${descr}`
+        }
+    }
+
+    calcularEExibirCoeficiente()
     sendInformation()
 	    
     </script>

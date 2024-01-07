@@ -63,6 +63,24 @@ p.question {
     align-items: center;
     text-align: justify;
 }
+
+p.resultado {
+    margin: 16pt auto;
+    color: #333333;
+    font-family: 'Arial', serif;
+    font-weight: normal;
+    width: 60%;
+    min-width: 300pt;
+    min-height: 80pt;
+    padding: 16pt;
+    border-radius: 16pt;
+    font-size: 18pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+}
+
 p.ideodesc {
     font-family: 'Arial', serif;
     color: #333333;
@@ -473,6 +491,15 @@ li.nav a:hover:not(.active), #navres a:hover {
     }
 
     p.question {
+        min-height: 224px;
+        max-width: 80%;
+        width: auto;
+        font-size: 40px;
+        text-align: justify;
+    }
+
+
+    p.resultado {
         min-height: 224px;
         max-width: 80%;
         width: auto;
